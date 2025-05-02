@@ -14,7 +14,7 @@ RTC_DS1307 rtc;
 
 // Global variables
 #define WSPR_FREQ       14096900UL  // 20M, 14.094,60
-#define LED_PIN         13
+const int ledPin = LED_BUILTIN;
 char call[] = "AC1GQ";
 char loc[] = "FN31";
 uint8_t dbm = 27;
@@ -35,7 +35,7 @@ void encode() {
     
     // Reset the tone to the base frequency and turn on the output
     si5351.output_enable(SI5351_CLK0, 1);
-    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(ledPin, HIGH);
 
     for(i = 0; i < WSPR_SYMBOL_COUNT; i++) {
         si5351.set_freq((WSPR_FREQ * 100) + (tx_buffer[i] * 146), SI5351_CLK0);
@@ -44,7 +44,7 @@ void encode() {
 
     // Turn off the output
     si5351.output_enable(SI5351_CLK0, 0);
-    digitalWrite(LED_PIN, LOW);
+    digitalWrite(ledPin, LOW);
     Serial.println("Transmission complete");
 }
 
@@ -75,8 +75,8 @@ void setup() {
     }
 
     // Configure pins and outputs
-    pinMode(LED_PIN, OUTPUT);
-    digitalWrite(LED_PIN, LOW);
+    pinMode((ledPin, OUTPUT);
+    digitalWrite((ledPin, LOW);
     si5351.drive_strength(SI5351_CLK0, SI5351_DRIVE_8MA);
     si5351.output_enable(SI5351_CLK0, 0);
 
